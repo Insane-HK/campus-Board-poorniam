@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campus Support Board - Posts by Date</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container posts-by-date-container">
+
+        <!-- Side Panel for browsing posts by date -->
+        <div class="side-panel">
+            <h3>Browse Posts by Date</h3>
+            <ul>
+                {% for date in distinct_dates %}
+                    <li>
+                        <a href="{{ url_for('posts_by_date', date=date['post_date']) }}">
+                            {{ date['post_date']|format_date }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content">
+            <div class="header">
+                <h1>Campus Support Board</h1>
+                <p class="welcome-message">Welcome, {{ session['nickname'] }}!</p>
+            </div>
+
+            {% if selected_date %}
+                <h2>Posts from {{ selected_date|format_date }}</h2>
+            {% endif %}
+
+            <!-- List of posts for the selected date -->
+            <div class="posts">
+                {% for post in posts %}
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-author">{{ post['nickname'] }}</div>
+                        <div class="post-date">{{ post['created_at']|format_date }}</div>
+                        <span class="tag">{{ post['tag'] }}</span>
+                    </div>
+                    <div class="post-content">{{ post['content'] }}</div>
+                    <div class="vote-buttons">
+                        <form action="{{ url_for('vote') }}" method="post" style="display: inline;">
+                            <input type="hidden" name="post_id" value="{{ post['id'] }}">
+                            <input type="hidden" name="vote_type" value="1">
+                            <button type="submit" class="vote-button upvote" {% if post['user_vote_type'] == 1 %}disabled{% endif %}>
+                                <i class="fas fa-thumbs-up"></i> {{ post['upvotes'] }}
+                            </button>
+                        </form>
+                        <form action="{{ url_for('vote') }}" method="post" style="display: inline;">
+                            <input type="hidden" name="post_id" value="{{ post['id'] }}">
+                            <input type="hidden" name="vote_type" value="-1">
+                            <button type="submit" class="vote-button downvote" {% if post['user_vote_type'] == -1 %}disabled{% endif %}>
+                                <i class="fas fa-thumbs-down"></i> {{ post['downvotes'] }}
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <h3>Comments ({{ post['comment_count'] }})</h3>
+
+                        {% for comment in post['comments'] %}
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">{{ comment['nickname'] }}</span>
+                                <span class="comment-date">{{ comment['created_at']|format_date }}</span>
+                            </div>
+                            <div class="comment-content">{{ comment['content'] }}</div>
+                        </div>
+                        {% endfor %}
+
+                        <form class="comment-form" action="{{ url_for('add_comment') }}" method="post">
+                            <input type="hidden" name="post_id" value="{{ post['id'] }}">
+                            <input type="text" name="comment_content" class="comment-input" placeholder="Write a comment..." required>
+                            <button type="submit">Comment</button>
+                        </form>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Auto-resize textareas
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+        });
+
+        // Fade out flash messages
+        setTimeout(() => {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(message => {
+                message.style.transition = 'opacity 0.5s ease-in-out';
+                message.style.opacity = '0';
+                setTimeout(() => message.remove(), 500);
+            });
+        }, 3000);
+    </script>
+
+</body>
+</html>

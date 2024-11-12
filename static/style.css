@@ -1,0 +1,299 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    background-color: #007bff;
+    padding: 20px;
+    color: white;
+}
+
+.welcome-message {
+    font-size: 1.2em;
+    color: #ffcc00;
+}
+
+/* Flash Messages */
+.flash-messages {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.flash-message {
+    background-color: #f8d7da;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    color: #721c24;
+    font-weight: bold;
+}
+
+/* Container for Posts */
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+    flex-grow: 1; /* Make container take up remaining space */
+    overflow-y: auto;
+}
+
+/* Side Panel */
+.side-panel {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: max-content;
+}
+
+.side-panel h3 {
+    color: #007bff;
+}
+
+.side-panel ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-panel ul li {
+    margin-bottom: 10px;
+}
+
+.side-panel a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.side-panel a:hover {
+    text-decoration: underline;
+}
+
+/* Post Form */
+.post-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.post-form h2 {
+    color: #007bff;
+}
+
+.post-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.post-form select,
+.post-form button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.post-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.post-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Posts Section */
+.posts {
+    flex: 3;  /* Posts section takes more space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.post {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.post-author {
+    font-weight: bold;
+}
+
+.post-date {
+    color: #777;
+}
+
+.tag {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.post-content {
+    margin-bottom: 15px;
+}
+
+.vote-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.vote-button {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.vote-button:hover {
+    background-color: #f0f0f0;
+}
+
+.comment-form input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.comment-form button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #777;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+}
+
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .side-panel {
+        margin-top: 20px;
+    }
+
+    .posts {
+        padding: 10px;
+    }
+}
+
+/* CSS for posts_by_date.html */
+.posts-by-date-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Side Panel in posts_by_date */
+.posts-by-date-container .side-panel {
+    flex: 1;
+}
+
+.posts-by-date-container .content {
+    flex: 3;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Browse Posts by Date Header */
+.posts-by-date-container h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Posts List in posts_by_date */
+.posts-by-date-container .content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.posts-by-date-container .content ul li {
+    margin-bottom: 10px;
+}
+
+.posts-by-date-container .content a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.posts-by-date-container .content a:hover {
+    text-decoration: underline;
+}
